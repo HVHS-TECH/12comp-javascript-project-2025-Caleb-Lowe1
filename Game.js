@@ -42,13 +42,12 @@ new Tiles([
 100, 300, //x,y
 16,16, //w,h 
 )}
-if (Player.Position.y <= 5){console.log("hello :)")}
+
 /*******************************************************/
 // draw()
 /*******************************************************/
 function draw() {
 background('gray');
-
 Movement();
 
 }

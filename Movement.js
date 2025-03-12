@@ -1,3 +1,4 @@
+var jumps = 0;
 function Movement() 
 {if (kb.pressing('a')) {
     Player.vel.x = -MOVEMENTSPEED;
@@ -5,9 +6,15 @@ function Movement()
     Player.vel.x = MOVEMENTSPEED;
 } 
 
-if (kb.pressing('w')) {
-    Player.vel.y = -MOVEMENTSPEED;
-} else if (kb.pressing('s')) {
+ 
+else if (kb.pressing('s')) {
     Player.vel.y = MOVEMENTSPEED;
-} 
+}
+
+if (kb.presses('w') && Player.vel.y == 0) {
+    Player.vel.y = -JUMPSPEED;
+    jumps = jumps + 1
+    console.log(jumps);
+    } 
+
 }

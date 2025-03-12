@@ -11,6 +11,7 @@ canvasSize = {
 	y: 600
 	}
 const MOVEMENTSPEED = 2;
+const JUMPSPEED = 6;
 //enviroment
 let sheetImg;
 let rock, cobblestone, water;
@@ -48,7 +49,7 @@ new Tiles([
 function draw() {
 background('gray');
 
-Movement();	
+Movement();
 
 }
 

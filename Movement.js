@@ -20,5 +20,8 @@ if (kb.presses('w') && Player.vel.y == 0) {
     jumps = jumps + 1
     console.log(jumps);
     } 
+    if (jumps == 5) {
+        console.log("hello")
+    }
 
 }

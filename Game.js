@@ -7,10 +7,10 @@
 var Player;
 var Score;
 canvasSize = {
-	x: 500,
-	y: 500
+	x: 1100,
+	y: 600
 	}
-
+const MOVEMENTSPEED = 2;
 //enviroment
 let sheetImg;
 let rock, cobblestone, water;
@@ -24,7 +24,7 @@ cnv = new Canvas(canvasSize.x,canvasSize.y, "pixelated x4")
 world.gravity.y = 10
 Player = new Sprite(100, 10, 10, 10, 'd');
 	Player.color = 'blue';
-	Player.rotationSpeed = 0;
+	
 	
 
 rock = new Group();
@@ -35,17 +35,21 @@ rock.tile = 'r';
 
 new Tiles([
 
-'rrrrrrrrrr'
+'rrrrrrrrrr',
+'rrrrrrrrrrrr'
 
 ],
-10, 50, //x,y
+100, 300, //x,y
 16,16, //w,h 
 )}
 /*******************************************************/
 // draw()
 /*******************************************************/
 function draw() {
-clear();	
+background('gray');
+
+Movement();	
+
 }
 
 /*******************************************************/

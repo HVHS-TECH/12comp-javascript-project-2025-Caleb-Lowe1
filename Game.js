@@ -10,8 +10,7 @@ canvasSize = {
 	x: 1100,
 	y: 600
 	}
-const MOVEMENTSPEED = 2;
-const JUMPSPEED = 6;
+
 //enviroment
 let sheetImg;
 let rock, cobblestone, water;
@@ -43,6 +42,7 @@ new Tiles([
 100, 300, //x,y
 16,16, //w,h 
 )}
+if (Player.Position.y <= 5){console.log("hello :)")}
 /*******************************************************/
 // draw()
 /*******************************************************/

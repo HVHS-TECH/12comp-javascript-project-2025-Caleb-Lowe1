@@ -22,7 +22,7 @@ function setup() {
 console.log("setup: ");
 cnv = new Canvas(canvasSize.x,canvasSize.y, "pixelated x4")
 world.gravity.y = 10
-Player = new Sprite(100, 10, 10, 10, 'd');
+Player = new Sprite(100, 289, 10, 10, 'd');
 	Player.color = 'blue';
 	
 	
@@ -30,13 +30,20 @@ Player = new Sprite(100, 10, 10, 10, 'd');
 rock = new Group();
 rock.collider = "static";
 rock.spriteSheet = sheetImg;
-rock.addAni({w:16, h:16, row:0, col:8 });
+rock.addAni({w:16, h:16, row:0, col:7 });
 rock.tile = 'r';
+
+cobblestone = new Group();
+cobblestone.collider = "static";
+cobblestone.spriteSheet = sheetImg;
+cobblestone.addAni({w:16, h:16, row:30, col:10 });
+cobblestone.tile = 'c';
 
 new Tiles([
 
 'rrrrrrrrrr',
-'rrrrrrrrrrrr'
+'rrrrrrrrrrrr',
+'rrrrrrrrrrrrrr..rrrrrrrrrrrrrrrrrcc'
 
 ],
 100, 300, //x,y
@@ -49,7 +56,7 @@ new Tiles([
 function draw() {
 background('gray');
 Movement();
-
+Player.rotation = 0;
 }
 
 /*******************************************************/

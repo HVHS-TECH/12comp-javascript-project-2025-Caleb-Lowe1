@@ -1,5 +1,5 @@
-const MOVEMENTSPEED = 2;
-const JUMPSPEED = 6;
+const MOVEMENTSPEED = 3;
+const JUMPSPEED = 4;
 var jumps = 0;
 function Movement() 
 {
@@ -15,7 +15,7 @@ else if (kb.pressing('s')) {
     Player.vel.y = MOVEMENTSPEED;
 }
 //jump code
-if (kb.presses('w') && Player.vel.y == 0) {
+if (kb.pressing('w') && Player.vel.y == 0 && Player.colliding(rock) || Player.colliding(cobblestone)) {
     Player.vel.y = -JUMPSPEED;
     jumps = jumps + 1
     console.log(jumps);

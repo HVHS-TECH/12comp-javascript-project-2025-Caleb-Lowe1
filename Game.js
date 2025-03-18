@@ -39,11 +39,17 @@ cobblestone.spriteSheet = sheetImg;
 cobblestone.addAni({w:16, h:16, row:30, col:10 });
 cobblestone.tile = 'c';
 
+water = new Group();
+water.collider = "static";
+water.spriteSheet = sheetImg;
+water.addAni({w:16, h:16, row:8, col:4 });
+water.tile = 'w';
+
 new Tiles([
 
 'rrrrrrrrrr',
 'rrrrrrrrrrrr',
-'rrrrrrrrrrrrrr..rrrrrrrrrrrrrrrrrcc'
+'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrwwccwwwwwwwwwwwwwwcccccccccccccccwwwwwwww'
 
 ],
 100, 300, //x,y

@@ -11,9 +11,7 @@ if (kb.pressing('a')) {
 } 
 
  
-else if (kb.pressing('s')) {
-    Player.vel.y = MOVEMENTSPEED;
-}
+
 //jump code
 if (kb.pressing('w') && Player.vel.y == 0 && Player.colliding(rock) || kb.pressing('w') && Player.vel.y == 0 && Player.colliding(cobblestone)) {
     Player.vel.y = -JUMPSPEED;
@@ -23,3 +21,4 @@ if (kb.pressing('w') && Player.vel.y == 0 && Player.colliding(rock) || kb.pressi
   
 
 }
+

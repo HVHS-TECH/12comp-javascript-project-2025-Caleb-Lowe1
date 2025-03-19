@@ -63,6 +63,8 @@ function draw() {
 background('gray');
 Movement();
 Player.rotation = 0;
+camera.x = Player.x;
+camera.y = Player.y;
 }
 
 /*******************************************************/

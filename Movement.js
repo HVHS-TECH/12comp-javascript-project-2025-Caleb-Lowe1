@@ -14,7 +14,7 @@ if (kb.pressing('a')) {
 
 //jump code
 if (kb.pressing('w') && Player.vel.y == 0 && Player.colliding(rock) || kb.pressing('w') && Player.vel.y == 0 && Player.colliding(cobblestone)) {
-    Player.vel.y = -JUMPSPEED;
+    Player.vel.y = -(JUMPSPEED);
     jumps = jumps + 1
     console.log(jumps);
     } 

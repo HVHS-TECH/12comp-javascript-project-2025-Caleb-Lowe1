@@ -22,7 +22,7 @@ function setup() {
 console.log("setup: ");
 cnv = new Canvas(canvasSize.x,canvasSize.y, "pixelated x4")
 world.gravity.y = 10
-Player = new Sprite(100, 289, 10, 10, 'd');
+Player = new Sprite(213, 477.9145351606422, 10, 10, 'd');
 	Player.color = 'blue';
 	
 	
@@ -42,14 +42,25 @@ cobblestone.tile = 'c';
 water = new Group();
 water.collider = "static";
 water.spriteSheet = sheetImg;
-water.addAni({w:16, h:16, row:8, col:4 });
+water.addAni({w:16, h:16, row:11, col:3 });
 water.tile = 'w';
 
 new Tiles([
-
+'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'r',
+'r',
+'r',
+'r',
+'r',
+'r',
+'r',	
+'r',
+'r',
+'r',
+'r',
 'rrrrrrrrrr',
 'rrrrrrrrrrrr',
-'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrwwccwwwwwwwwwwwwwwcccccccccccccccwwwwwwww'
+'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrccccwwwwwwwwwwwwwwcccccccccccccccwwwwwwww'
 
 ],
 100, 300, //x,y
@@ -62,9 +73,11 @@ new Tiles([
 function draw() {
 background('gray');
 Movement();
+
 Player.rotation = 0;
 camera.x = Player.x;
 camera.y = Player.y;
+
 }
 
 /*******************************************************/

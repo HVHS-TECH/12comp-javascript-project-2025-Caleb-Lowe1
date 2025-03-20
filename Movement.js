@@ -1,6 +1,5 @@
 const MOVEMENTSPEED = 3;
 const JUMPSPEED = 4;
-var jumps = 0;
 function Movement() 
 {
 //movement code    
@@ -12,11 +11,9 @@ if (kb.pressing('a')) {
 
  
 
-//jump code
-if (kb.pressing('w') && Player.vel.y == 0 && Player.colliding(rock) || kb.pressing('w') && Player.vel.y == 0 && Player.colliding(cobblestone)) {
+//jump code, checks if the user is colliding with the ground and if true then and the user is pressing down on 'w' then it will allow the player to jump 
+if (kb.presses('w') && Player.colliding(rock) || kb.presses('w') && Player.colliding(cobblestone)) {
     Player.vel.y = -(JUMPSPEED);
-    jumps = jumps + 1
-    console.log(jumps);
     } 
   
 

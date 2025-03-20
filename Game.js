@@ -7,13 +7,13 @@
 var Player;
 var Score;
 canvasSize = {
-	x: 1100,
+	x: 1200,
 	y: 600
 	}
 
 //enviroment
 let sheetImg;
-let rock, cobblestone, water;
+let rock, cobblestone, water, gold;
 function preload() {sheetImg = loadImage("Textures-16.png");}
 /*******************************************************/
 // setup()
@@ -25,7 +25,11 @@ world.gravity.y = 10
 Player = new Sprite(213, 477.9145351606422, 10, 10, 'd');
 	Player.color = 'blue';
 	
-	
+diamond = new Group();
+diamond.collider = "static";
+diamond.spriteSheet = sheetImg;
+diamond.addAni({w:16, h:16, row:11, col:3 });
+diamond.tile = 'd';
 
 rock = new Group();
 rock.collider = "static";
@@ -42,7 +46,7 @@ cobblestone.tile = 'c';
 water = new Group();
 water.collider = "static";
 water.spriteSheet = sheetImg;
-water.addAni({w:16, h:16, row:11, col:3 });
+water.addAni({w:16, h:16, row:8, col:0 });
 water.tile = 'w';
 
 new Tiles([
@@ -55,7 +59,7 @@ new Tiles([
 'r',
 'r',	
 'r',
-'r',
+'r.......d',
 'r',
 'r',
 'rrrrrrrrrr',
@@ -67,17 +71,18 @@ new Tiles([
 16,16, //w,h 
 )}
 
+function lose()	{console.log("you died")}
 /*******************************************************/
 // draw()
 /*******************************************************/
 function draw() {
 background('gray');
-Movement();
-
 Player.rotation = 0;
+Movement();
+//makes the camera follow the player 
 camera.x = Player.x;
 camera.y = Player.y;
-
+if (Player.collides(water)){lose();}
 }
 
 /*******************************************************/

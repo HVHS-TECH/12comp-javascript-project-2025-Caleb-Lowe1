@@ -5,7 +5,7 @@
 /*******************************************************/
 //Variables
 var Player;
-var Score;
+var score = 0;
 canvasSize = {
 	x: 1200,
 	y: 600
@@ -13,7 +13,7 @@ canvasSize = {
 
 //enviroment
 let sheetImg;
-let rock, cobblestone, water, gold;
+let rock, cobblestone, water, diamond;
 function preload() {sheetImg = loadImage("Textures-16.png");}
 /*******************************************************/
 // setup()
@@ -61,17 +61,31 @@ new Tiles([
 'r',
 'r.......d',
 'r',
-'r',
+'r................................d',
 'rrrrrrrrrr',
-'rrrrrrrrrrrr',
+'rrrrrrrrrrrr...........................................d',
 'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrccccwwwwwwwwwwwwwwcccccccccccccccwwwwwwww'
 
 ],
 100, 300, //x,y
 16,16, //w,h 
 )}
+//if the player collides with a diamond the diamond will disapear and the user will gain 100 score 
+function playercollectsdiamond(diamond, Player) {
+    
+    diamond.remove();
+    score = score + 100;
 
-function lose()	{console.log("you died")}
+    Player.rotationSpeed = 0;
+    Player.rotation = 0;
+	
+}
+function displayScore() {
+    textSize(30);
+	text("Score: " + score, 0, 25);
+}
+function lose()	{console.log("you died")};
+function win() {console.log("you win")}
 /*******************************************************/
 // draw()
 /*******************************************************/
@@ -82,7 +96,15 @@ Movement();
 //makes the camera follow the player 
 camera.x = Player.x;
 camera.y = Player.y;
-if (Player.collides(water)){lose();}
+if (Player.y >= 700){lose();}
+displayScore();
+//console.log(Player.x)
+//console.log(Player.y)
+if (Player.x >= 1100) {win();}
+if (diamond.collides(Player, playercollectsdiamond)) {
+	playerHitCoin();	
+	}
+	
 }
 
 /*******************************************************/

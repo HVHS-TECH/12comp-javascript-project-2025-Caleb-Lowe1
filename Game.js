@@ -11,10 +11,14 @@ canvasSize = {
 	y: 600
 	}
 
+let restart;	
 //enviroment
 let sheetImg;
 let rock, cobblestone, water, diamond;
-function preload() {sheetImg = loadImage("Textures-16.png");}
+function preload() {
+	sheetImg = loadImage("Textures-16.png");
+	buttonImg = loadImage("Restart.png")
+}
 /*******************************************************/
 // setup()
 /*******************************************************/
@@ -84,7 +88,21 @@ function displayScore() {
     textSize(30);
 	text("Score: " + score, 0, 25);
 }
-function lose()	{console.log("you died")};
+function lose()	{console.log("you died");
+Player.remove()
+water.remove()
+diamond.remove()
+cobblestone.remove()
+rock.remove()
+background("yellow");
+textSize(20)
+textAlign(CENTER, CENTER);
+text("YOU WON!!", canvasSize/2, 50);
+text("Score: "+ score, canvasSize/2, 100);
+text("Books issued: " + booksFound + "/6", canvasSize.x/2, 150)
+}
+
+
 function win() {console.log("you win")}
 /*******************************************************/
 // draw()
@@ -104,6 +122,10 @@ if (Player.x >= 1100) {win();}
 if (diamond.collides(Player, playercollectsdiamond)) {
 	playerHitCoin();	
 	}
+	
+}
+
+function Restart(){
 	
 }
 

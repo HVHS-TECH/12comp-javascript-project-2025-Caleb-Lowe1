@@ -16,7 +16,7 @@ canvasSize = {
 var restartButton;	
 //enviroment
 let sheetImg;
-let rock, cobblestone, water, diamond;
+let rock, cobblestone, water, diamond, lava;
 function preload() {
 	sheetImg = loadImage("Textures-16.png");
 	buttonImg = loadImage("Restart.png")
@@ -31,7 +31,13 @@ cnv = new Canvas(canvasSize.x,canvasSize.y, "pixelated x4")
 world.gravity.y = 10
 Player = new Sprite(213, 477.9145351606422, 10, 10, 'd');
 	Player.color = 'blue';
-	
+
+lava = new Group();
+lava.collider = "static";
+lava.spriteSheet = sheetImg;
+lava.addAni({w:16, h:16, row:9, col:11 });
+lava.tile = 'l';
+
 diamond = new Group();
 diamond.collider = "static";
 diamond.spriteSheet = sheetImg;
@@ -71,7 +77,7 @@ new Tiles([
 'r................................d',
 'rrrrrrrrrr',
 'rrrrrrrrrrrr...........................................d',
-'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrccccwwwwwwwwwwwwwwcccccccccccccccwwwwwwww'
+'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrccllwwwwwwwwwwwwwwcccccccccccccccwwwwwwww'
 
 ],
 100, 300, //x,y
@@ -140,14 +146,15 @@ displayScore();
 	//makes the camera follow the player 
 camera.x = Player.x;
 camera.y = Player.y;
+
 if (Player.x >= 1100) {completedlevel();}
-if (Player.y >= 700){lostgame();}
+if (Player.y >= 700 || Player.collides (lava)){lostgame();}
 
 //console.log(Player.x)
 //console.log(Player.y)
 
 if (diamond.collides(Player, playercollectsdiamond)) {
-	playerHitCoin();
+	playercollectsdiamond();
 		
 	}
 }
@@ -164,6 +171,7 @@ function completedlevel(){
 	diamond.removeAll();
 	cobblestone.removeAll();
 	rock.removeAll();
+	lava.removeAll();
 
 	camera.x = canvasSize.x/2;
     camera.y = canvasSize.y/2;
@@ -191,6 +199,7 @@ function lostgame()	{
 	diamond.removeAll();
 	cobblestone.removeAll();
 	rock.removeAll();
+	lava.removeAll();
 	camera.x = canvasSize.x/2;
     camera.y = canvasSize.y/2;
 	background("red");

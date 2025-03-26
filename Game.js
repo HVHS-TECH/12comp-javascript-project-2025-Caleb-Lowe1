@@ -76,7 +76,9 @@ new Tiles([
 ],
 100, 300, //x,y
 16,16, //w,h 
+
 )}
+
 //if the player collides with a diamond the diamond will disapear and the user will gain 100 score 
 function playercollectsdiamond(diamond, Player) {
     
@@ -120,11 +122,19 @@ function draw() {
 /*******************************************************/
 // Functions()
 /*******************************************************/
+function displayScore() {
+	textSize(20);
+	text("Score: " + score, 0, 15);	
+}
+
 function runGame(){
-	displayScore();
 	
-	clear();
-	background("grey")
+	
+
+	
+clear();
+background("grey")
+displayScore();
 	Player.rotation = 0;
 	Movement();
 	//makes the camera follow the player 
@@ -137,7 +147,8 @@ if (Player.y >= 700){lostgame();}
 //console.log(Player.y)
 
 if (diamond.collides(Player, playercollectsdiamond)) {
-	playerHitCoin();	
+	playerHitCoin();
+		
 	}
 }
 function win () {
@@ -147,6 +158,7 @@ function win () {
 	}
 function completedlevel(){
 	gameState = "win";
+	
 	Player.remove();
 	water.removeAll();
 	diamond.removeAll();
@@ -173,6 +185,7 @@ function lose () {
 }
 function lostgame()	{
 	gameState = "lose";
+	
 	Player.remove();
 	water.removeAll();
 	diamond.removeAll();
@@ -188,12 +201,7 @@ function lostgame()	{
 	Restart();
 	}
 
-	function displayScore() {
-		textSize(20);
-		text("Score: " + score, 100, 100);
-		
-	}
-
+	
 function Restart(){
 	restartButton = new Sprite (canvasSize.x/2, 200);
     restartButton.spriteSheet = buttonImg;

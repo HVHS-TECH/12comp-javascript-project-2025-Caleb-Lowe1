@@ -7,13 +7,13 @@
 var Player;
 var score = 0;
 canvasSize = {
-	x: 800,
-	y: 500
+	x: 1200,
+	y: 600
 	}
 
 gameState = "play";
 
-let restartButton;	
+var restartButton;	
 //enviroment
 let sheetImg;
 let rock, cobblestone, water, diamond;
@@ -86,10 +86,7 @@ function playercollectsdiamond(diamond, Player) {
     Player.rotation = 0;
 	
 }
-function displayScore() {
-    textSize(30);
-	text("Score: " + score, 0, 25);
-}
+
 
 
 
@@ -101,7 +98,9 @@ function draw() {
 
 	if (gameState == "play") {
         runGame();
+		
     }
+	else {!displayScore()};
     if (gameState == "win") {
         win();
     }
@@ -110,7 +109,7 @@ function draw() {
     }
 
 
-
+Player.rotation = 0;
 	
 }
 
@@ -120,6 +119,24 @@ function draw() {
 /*******************************************************/
 // Functions()
 /*******************************************************/
+function runGame(){
+	clear();
+	background("grey")
+	Player.rotation = 0;
+	Movement();
+	//makes the camera follow the player 
+camera.x = Player.x;
+camera.y = Player.y;
+if (Player.x >= 1100) {completedlevel();}
+if (Player.y >= 700){lostgame();}
+
+//console.log(Player.x)
+//console.log(Player.y)
+
+if (diamond.collides(Player, playercollectsdiamond)) {
+	playerHitCoin();	
+	}
+}
 function win () {
 	console.log("WINNING")
 		mouseInteractRestartButton();
@@ -127,16 +144,21 @@ function win () {
 	}
 function completedlevel(){
 	gameState = "win";
-	Player.remove()
-	water.remove()
-	diamond.remove()
-	cobblestone.remove()
-	rock.remove()
+	Player.remove();
+	water.removeAll();
+	diamond.removeAll();
+	cobblestone.removeAll();
+	rock.removeAll();
+
+	camera.x = canvasSize.x/2;
+    camera.y = canvasSize.y/2;
 	background("yellow");
-	textSize(20)
+	textSize(20);
 	textAlign(CENTER, CENTER);
 	text("YOU WON!!", canvasSize.x/2, 50);
 	text("Score: "+ score, canvasSize.x/2, 100);
+
+
 	Restart();
 }
 
@@ -148,35 +170,26 @@ function lose () {
 }
 function lostgame()	{
 	gameState = "lose";
-	Player.remove()
-	water.remove()
-	diamond.remove()
-	cobblestone.remove()
-	rock.remove()
+	Player.remove();
+	water.removeAll();
+	diamond.removeAll();
+	cobblestone.removeAll();
+	rock.removeAll();
+	camera.x = canvasSize.x/2;
+    camera.y = canvasSize.y/2;
 	background("red");
-	textSize(20)
+	textSize(20);
 	textAlign(CENTER, CENTER);
 	text("you lost!!", canvasSize.x/2, 50);
 	text("Score: "+ score, canvasSize.x/2, 100);
 	Restart();
 	}
-function runGame(){
-	background("grey")
-	Player.rotation = 0;
-	Movement();
-	//makes the camera follow the player 
-camera.x = Player.x;
-camera.y = Player.y;
-if (Player.x >= 1100) {completedlevel();}
-if (Player.y >= 700){lostgame();}
-displayScore();
-//console.log(Player.x)
-//console.log(Player.y)
 
-if (diamond.collides(Player, playercollectsdiamond)) {
-	playerHitCoin();	
+	function displayScore() {
+		textSize(20);
+		text("Score: " + score, 0, 15);
 	}
-}
+
 function Restart(){
 	restartButton = new Sprite (canvasSize.x/2, 200);
     restartButton.spriteSheet = buttonImg;
@@ -186,6 +199,14 @@ function Restart(){
 function mouseInteractRestartButton () {
     if (restartButton.mouse.hovering()) {
         restartButton.addAni ({w:16, h:16, row:1, col:0,}); 
+	
+    }
+
+	else {
+        restartButton.addAni ({w:16, h:16, row:0, col:0,});     
+    }
+    if (restartButton.mouse.pressing()) {
+        window.location.href = "Game.html";
     }}
 /*******************************************************/
 //  END OF APP

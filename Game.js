@@ -11,7 +11,7 @@ canvasSize = {
 	y: 600
 	}
 
-gameState = "play";
+
 
 var restartButton;	
 //enviroment
@@ -25,6 +25,7 @@ function preload() {
 // setup()
 /*******************************************************/
 function setup() {
+	gameState = "play";
 console.log("setup: ");
 cnv = new Canvas(canvasSize.x,canvasSize.y, "pixelated x4")
 world.gravity.y = 10
@@ -100,7 +101,7 @@ function draw() {
         runGame();
 		
     }
-	else {!displayScore()};
+	
     if (gameState == "win") {
         win();
     }
@@ -109,7 +110,7 @@ function draw() {
     }
 
 
-Player.rotation = 0;
+
 	
 }
 
@@ -120,6 +121,8 @@ Player.rotation = 0;
 // Functions()
 /*******************************************************/
 function runGame(){
+	displayScore();
+	
 	clear();
 	background("grey")
 	Player.rotation = 0;
@@ -187,7 +190,8 @@ function lostgame()	{
 
 	function displayScore() {
 		textSize(20);
-		text("Score: " + score, 0, 15);
+		text("Score: " + score, 100, 100);
+		
 	}
 
 function Restart(){

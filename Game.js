@@ -148,7 +148,7 @@ camera.x = Player.x;
 camera.y = Player.y;
 
 if (Player.x >= 1100) {completedlevel();}
-if (Player.y >= 700 || Player.collides (lava)){lostgame();}
+if (Player.y >= 1300 || Player.collides (lava)){lostgame();}
 
 //console.log(Player.x)
 //console.log(Player.y)

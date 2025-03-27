@@ -16,7 +16,7 @@ canvasSize = {
 var restartButton;	
 //enviroment
 let sheetImg;
-let rock, cobblestone, water, diamond, lava;
+let rock, cobblestone, unclimableblock, diamond, lava, gold;
 function preload() {
 	sheetImg = loadImage("Textures-16.png");
 	buttonImg = loadImage("Restart.png")
@@ -38,6 +38,13 @@ lava.spriteSheet = sheetImg;
 lava.addAni({w:16, h:16, row:9, col:11 });
 lava.tile = 'l';
 
+
+gold = new Group();
+gold.collider = "static";
+gold.spriteSheet = sheetImg;
+gold.addAni({w:16, h:16, row:11, col:3 });
+gold.tile = 'g';
+
 diamond = new Group();
 diamond.collider = "static";
 diamond.spriteSheet = sheetImg;
@@ -56,11 +63,11 @@ cobblestone.spriteSheet = sheetImg;
 cobblestone.addAni({w:16, h:16, row:30, col:10 });
 cobblestone.tile = 'c';
 
-water = new Group();
-water.collider = "static";
-water.spriteSheet = sheetImg;
-water.addAni({w:16, h:16, row:8, col:0 });
-water.tile = 'w';
+unclimableblock = new Group();
+unclimableblock.collider = "static";
+unclimableblock.spriteSheet = sheetImg;
+unclimableblock.addAni({w:16, h:16, row:1, col:9 });
+unclimableblock.tile = 'w';
 
 new Tiles([
 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
@@ -71,14 +78,16 @@ new Tiles([
 'r',
 'r',
 'r',	
-'r',
-'r.......d',
-'r',
-'r................................d',
-'rrrrrrrrrr',
-'rrrrrrrrrrrr...........................................d',
-'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrccllwwwwwwwwwwwwwwcccccccccccccccwwwwwwww'
-
+'r.................................................................r',
+'r.......d.........................................................r',
+'r.................................................................r',
+'r................................d................................r',
+'rrrrrrrrrr.......................................................rrr',
+'rrrrrrrrrrrr.....g.....................................d........rrrr',
+'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrcr..wrrrrrrrrrrrrrcccccccccccccccwwwwwwwwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrwllwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'
 ],
 100, 300, //x,y
 16,16, //w,h 
@@ -90,6 +99,16 @@ function playercollectsdiamond(diamond, Player) {
     
     diamond.remove();
     score = score + 100;
+
+    Player.rotationSpeed = 0;
+    Player.rotation = 0;
+	
+}
+
+function playercollectsgold(gold, Player) {
+    
+    gold.remove();
+    score = score + 50;
 
     Player.rotationSpeed = 0;
     Player.rotation = 0;
@@ -116,10 +135,8 @@ function draw() {
     if (gameState == "lose") {
         lose();
     }
-
-
-
-	
+console.log(Player.x)
+    
 }
 
 
@@ -146,18 +163,29 @@ displayScore();
 	//makes the camera follow the player 
 camera.x = Player.x;
 camera.y = Player.y;
-
-if (Player.x >= 1100) {completedlevel();}
 if (Player.y >= 1300 || Player.collides (lava)){lostgame();}
+if (Player.x >= 1000) {completedlevel();}
+
+
+
 
 //console.log(Player.x)
 //console.log(Player.y)
 
 if (diamond.collides(Player, playercollectsdiamond)) {
+	
 	playercollectsdiamond();
 		
 	}
+
+
+	if (gold.collides(Player, playercollectsgold)) {
+	
+		playercollectsgold();
+			
+		}	
 }
+
 function win () {
 	console.log("WINNING")
 		mouseInteractRestartButton();
@@ -165,10 +193,11 @@ function win () {
 	}
 function completedlevel(){
 	gameState = "win";
-	
+	score = score + 200;
 	Player.remove();
-	water.removeAll();
+	unclimableblock.removeAll();
 	diamond.removeAll();
+	gold.removeAll();
 	cobblestone.removeAll();
 	rock.removeAll();
 	lava.removeAll();
@@ -195,11 +224,12 @@ function lostgame()	{
 	gameState = "lose";
 	
 	Player.remove();
-	water.removeAll();
+	unclimableblock.removeAll();
 	diamond.removeAll();
 	cobblestone.removeAll();
 	rock.removeAll();
 	lava.removeAll();
+	gold.removeAll();
 	camera.x = canvasSize.x/2;
     camera.y = canvasSize.y/2;
 	background("red");

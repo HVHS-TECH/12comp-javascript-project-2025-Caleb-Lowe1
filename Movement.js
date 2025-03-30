@@ -1,4 +1,4 @@
-const MOVEMENTSPEED = 3;
+const MOVEMENTSPEED = 2.4;
 const JUMPSPEED = 4;
 function Movement() 
 {

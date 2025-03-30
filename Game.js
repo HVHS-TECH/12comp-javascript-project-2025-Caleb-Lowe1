@@ -74,24 +74,24 @@ unclimableblock.addAni({w:16, h:16, row:1, col:9 });
 unclimableblock.tile = 'w';
 
 new Tiles([
-'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
-'r',
-'r',
-'r',
-'r',
-'r',
-'r',
-'r',	
-'r...............................................d.................r',
-'r.......d...................................r.....................r',
-'r...........................................r.....................r',
-'r................................d..........r.....................r',
-'rrrrrrrrrr.......................................................rrr',
-'rrrrrrrrrrrr.....e.....................................d........rrrr',
-'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrcr..wrrrrrrrrrrrrrcccccccccccccccwwwwwwwwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
-'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
-'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
-'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrwllwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'
+'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'w',
+'w',
+'w',
+'w',
+'w',
+'w',
+'w.......................e',	
+'w......................rrr.......................d.................r',
+'w.......d......rr..........................r.....................r',
+'w...........................................r.....................r',
+'w...........rr...................d..........r.....................r',
+'rrrrrrrrrr.......................................................rrr.................e',
+'rrrrrrrrrrr......e.....................................d........rrrr',
+'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrcr..wrrrrrrrrrrrrrcccccccccccccccwwwwwwwwrrrrrrrrrrrr....rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........w....w',
+'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........w....w',
+'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrwllwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........wllllw'
 ],
 100, 300, //x,y
 16,16, //w,h 
@@ -102,7 +102,7 @@ new Tiles([
 function playercollectsdiamond(diamond, Player) {
     
     diamond.remove();
-    score = score + 100;
+    score = score + 70;
 
     Player.rotationSpeed = 0;
     Player.rotation = 0;
@@ -112,7 +112,7 @@ function playercollectsdiamond(diamond, Player) {
 function playercollectsemerald(emerald, Player) {
     
     emerald.remove();
-    score = score + 50;
+    score = score + 120;
 
     Player.rotationSpeed = 0;
     Player.rotation = 0;
@@ -168,7 +168,7 @@ displayScore();
 camera.x = Player.x;
 camera.y = Player.y;
 if (Player.y >= 1300 || Player.collides (lava)){lostgame();}
-if (Player.x >= 1000) {completedlevel();}
+if (Player.x >= 2000) {completedlevel();}
 
 
 

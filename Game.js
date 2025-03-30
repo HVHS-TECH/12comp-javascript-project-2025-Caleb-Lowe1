@@ -78,10 +78,10 @@ new Tiles([
 'r',
 'r',
 'r',	
-'r.................................................................r',
-'r.......d.........................................................r',
-'r.................................................................r',
-'r................................d................................r',
+'r...............................................d.................r',
+'r.......d...................................r.....................r',
+'r...........................................r.....................r',
+'r................................d..........r.....................r',
 'rrrrrrrrrr.......................................................rrr',
 'rrrrrrrrrrrr.....g.....................................d........rrrr',
 'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrcr..wrrrrrrrrrrrrrcccccccccccccccwwwwwwwwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
@@ -169,8 +169,7 @@ if (Player.x >= 1000) {completedlevel();}
 
 
 
-//console.log(Player.x)
-//console.log(Player.y)
+
 
 if (diamond.collides(Player, playercollectsdiamond)) {
 	

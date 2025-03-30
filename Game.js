@@ -1,3 +1,5 @@
+//gem textures https://laredgames.itch.io/gems-coins-free
+//map textures https://piiixl.itch.io/textures
 /*******************************************************/
 // P5.play: Cave run
 // Extension tasks
@@ -16,10 +18,12 @@ canvasSize = {
 var restartButton;	
 //enviroment
 let sheetImg;
-let rock, cobblestone, unclimableblock, diamond, lava, gold;
+let rock, cobblestone, unclimableblock, lava, diamond, emerald;
 function preload() {
 	sheetImg = loadImage("Textures-16.png");
-	buttonImg = loadImage("Restart.png")
+	buttonImg = loadImage("Restart.png");
+	diamondImg = loadImage("spr_coin_azu.png")
+	emeraldImg = loadImage("spr_coin_strip4.png")
 }
 /*******************************************************/
 // setup()
@@ -39,16 +43,16 @@ lava.addAni({w:16, h:16, row:9, col:11 });
 lava.tile = 'l';
 
 
-gold = new Group();
-gold.collider = "static";
-gold.spriteSheet = sheetImg;
-gold.addAni({w:16, h:16, row:11, col:3 });
-gold.tile = 'g';
+emerald = new Group();
+emerald.collider = "static";
+emerald.spriteSheet = emeraldImg;
+emerald.addAni({w:16, h:16, row:0, col:0 });
+emerald.tile = 'e';
 
 diamond = new Group();
 diamond.collider = "static";
-diamond.spriteSheet = sheetImg;
-diamond.addAni({w:16, h:16, row:11, col:3 });
+diamond.spriteSheet = diamondImg;
+diamond.addAni({w:16, h:16, row:0, col:0 });
 diamond.tile = 'd';
 
 rock = new Group();
@@ -83,7 +87,7 @@ new Tiles([
 'r...........................................r.....................r',
 'r................................d..........r.....................r',
 'rrrrrrrrrr.......................................................rrr',
-'rrrrrrrrrrrr.....g.....................................d........rrrr',
+'rrrrrrrrrrrr.....e.....................................d........rrrr',
 'rrrrrrrrrrrr.rrrrrrrrrrrrrrrrrcr..wrrrrrrrrrrrrrcccccccccccccccwwwwwwwwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
@@ -105,9 +109,9 @@ function playercollectsdiamond(diamond, Player) {
 	
 }
 
-function playercollectsgold(gold, Player) {
+function playercollectsemerald(emerald, Player) {
     
-    gold.remove();
+    emerald.remove();
     score = score + 50;
 
     Player.rotationSpeed = 0;
@@ -135,7 +139,7 @@ function draw() {
     if (gameState == "lose") {
         lose();
     }
-console.log(Player.x)
+
     
 }
 
@@ -178,9 +182,9 @@ if (diamond.collides(Player, playercollectsdiamond)) {
 	}
 
 
-	if (gold.collides(Player, playercollectsgold)) {
+	if (emerald.collides(Player, playercollectsemerald)) {
 	
-		playercollectsgold();
+		playercollectsemerald();
 			
 		}	
 }
@@ -196,7 +200,7 @@ function completedlevel(){
 	Player.remove();
 	unclimableblock.removeAll();
 	diamond.removeAll();
-	gold.removeAll();
+	emerald.removeAll();
 	cobblestone.removeAll();
 	rock.removeAll();
 	lava.removeAll();
@@ -228,7 +232,7 @@ function lostgame()	{
 	cobblestone.removeAll();
 	rock.removeAll();
 	lava.removeAll();
-	gold.removeAll();
+	emerald.removeAll();
 	camera.x = canvasSize.x/2;
     camera.y = canvasSize.y/2;
 	background("red");

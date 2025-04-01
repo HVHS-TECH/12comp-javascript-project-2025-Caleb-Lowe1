@@ -17,6 +17,7 @@ canvasSize = {
 
 
 var restartButton;	
+//var backButton;	
 //enviroment
 let sheetImg;
 let rock, cobblestone, unclimableblock, lava, diamond, emerald;
@@ -25,6 +26,7 @@ function preload() {
 	buttonImg = loadImage("Restart.png");
 	diamondImg = loadImage("spr_coin_azu.png")
 	emeraldImg = loadImage("spr_coin_strip4.png")
+	//backImg = loadImage("back.png");
 }
 /*******************************************************/
 // setup()
@@ -45,13 +47,13 @@ lava.tile = 'l';
 
 
 emerald = new Group();
-emerald.collider = "static";
+emerald.collider = "none";
 emerald.spriteSheet = emeraldImg;
 emerald.addAni({w:16, h:16, row:0, col:0 });
 emerald.tile = 'e';
 
 diamond = new Group();
-diamond.collider = "static";
+diamond.collider = "none";
 diamond.spriteSheet = diamondImg;
 diamond.addAni({w:16, h:16, row:0, col:0 });
 diamond.tile = 'd';
@@ -87,7 +89,7 @@ new Tiles([
 'w........d........rr........................r.....................r',
 'w...........................................r.....................r',
 'w...........rr...................d..........r.....................r',
-'rrrrrrrrrr.......................................................rrr.................e',
+'rrrrrrrrrr.......................................................rrr.................',
 'rrrrrrrrrrr......e.....................................d........rrrr',
 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrcr..wrrrrrrrrrrrrrcccccccccccccccwwwwwwwwrrrrrrrrrrrr....rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........w....w',
@@ -110,9 +112,9 @@ function playercollectsdiamond(d) {
 	
 }
 
-function playercollectsemerald(emerald, Player) {
+function playercollectsemerald(e) {
     
-    emerald.remove();
+    e.remove();
     score = score + 120;
 
     Player.rotationSpeed = 0;
@@ -175,14 +177,14 @@ if (Player.x >= 2000) {completedlevel();}
 
 
 
-if (diamond.collides(Player, playercollectsdiamond)) {
+if (diamond.overlaps(Player, playercollectsdiamond)) {
 	
 	playercollectsdiamond();
 		
 	}
 
 
-	if (emerald.collides(Player, playercollectsemerald)) {
+	if (emerald.overlaps(Player, playercollectsemerald)) {
 	
 		playercollectsemerald();
 			
@@ -220,7 +222,7 @@ function completedlevel(){
 function lose () {
     console.log ("I LOST :(");
     mouseInteractRestartButton();
-
+	//mouseInteractBackButton();
 
 }
 function lostgame()	{
@@ -241,15 +243,10 @@ function lostgame()	{
 	text("you lost!!", canvasSize.x/2, 50);
 	text("Score: "+ score, canvasSize.x/2, 100);
 	Restart();
+	//Back();
 	}
 
 	
-function Restart(){
-	restartButton = new Sprite (canvasSize.x/2, 200);
-    restartButton.spriteSheet = buttonImg;
-    restartButton.addAni ({w:16, h:16, row:0, col:0,}); 
-    restartButton.collider = "static";	
-}
 function mouseInteractRestartButton () {
     if (restartButton.mouse.hovering()) {
         restartButton.addAni ({w:16, h:16, row:1, col:0,}); 
@@ -262,6 +259,35 @@ function mouseInteractRestartButton () {
     if (restartButton.mouse.pressing()) {
         window.location.href = "Game.html";
     }}
+
+	function Restart(){
+		restartButton = new Sprite (canvasSize.x/2, 200);
+	  restartButton.spriteSheet = buttonImg;
+	  restartButton.addAni ({w:16, h:16, row:0, col:0,}); 
+	   restartButton.collider = "static";	
+   };
+
+	//function Back(){
+	//	backButton = new Sprite (200, 100);
+	//	backButton.spriteSheet = backImg;
+	//	backButton.addAni ({w:16, h:16, row:0, col:0,}); 
+	//	backButton.collider = "static";	
+	//}
+	
+
+	//function mouseInteractBackButton () {
+	//	if (backButton.mouse.hovering()) {
+		//	backButton.addAni ({w:16, h:16, row:1, col:0,}); 
+		
+	//	}
+	
+	//	else {
+	//		backButton.addAni ({w:16, h:16, row:0, col:0,});     
+	//	}
+	//	if (backButton.mouse.pressing()) {
+	//		window.location.href = "index.html";
+	//	}}
+
 /*******************************************************/
 //  END OF APP
 /*******************************************************/

@@ -8,6 +8,7 @@
 //Variables
 var Player;
 var score = 0;
+
 canvasSize = {
 	x: 1200,
 	y: 600
@@ -83,7 +84,7 @@ new Tiles([
 'w',
 'w.......................e',	
 'w......................rrr.......................d.................r',
-'w.......d......rr..........................r.....................r',
+'w........d........rr........................r.....................r',
 'w...........................................r.....................r',
 'w...........rr...................d..........r.....................r',
 'rrrrrrrrrr.......................................................rrr.................e',
@@ -99,9 +100,9 @@ new Tiles([
 )}
 
 //if the player collides with a diamond the diamond will disapear and the user will gain 100 score 
-function playercollectsdiamond(diamond, Player) {
+function playercollectsdiamond(d) {
     
-    diamond.remove();
+    d.remove();
     score = score + 70;
 
     Player.rotationSpeed = 0;
@@ -140,7 +141,6 @@ function draw() {
         lose();
     }
 
-    
 }
 
 

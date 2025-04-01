@@ -17,7 +17,7 @@ canvasSize = {
 
 
 var restartButton;	
-//var backButton;	
+var backButton;	
 //enviroment
 let sheetImg;
 let rock, cobblestone, unclimableblock, lava, diamond, emerald;
@@ -26,7 +26,7 @@ function preload() {
 	buttonImg = loadImage("Restart.png");
 	diamondImg = loadImage("spr_coin_azu.png")
 	emeraldImg = loadImage("spr_coin_strip4.png")
-	//backImg = loadImage("back.png");
+	backImg = loadImage("back.png");
 }
 /*******************************************************/
 // setup()
@@ -222,7 +222,7 @@ function completedlevel(){
 function lose () {
     console.log ("I LOST :(");
     mouseInteractRestartButton();
-	//mouseInteractBackButton();
+	mouseInteractBackButton();
 
 }
 function lostgame()	{
@@ -243,7 +243,7 @@ function lostgame()	{
 	text("you lost!!", canvasSize.x/2, 50);
 	text("Score: "+ score, canvasSize.x/2, 100);
 	Restart();
-	//Back();
+	Back();
 	}
 
 	
@@ -267,26 +267,26 @@ function mouseInteractRestartButton () {
 	   restartButton.collider = "static";	
    };
 
-	//function Back(){
-	//	backButton = new Sprite (200, 100);
-	//	backButton.spriteSheet = backImg;
-	//	backButton.addAni ({w:16, h:16, row:0, col:0,}); 
-	//	backButton.collider = "static";	
-	//}
+	function Back(){
+		backButton = new Sprite (200, 100);
+		backButton.spriteSheet = backImg;
+		backButton.addAni ({w:16, h:16, row:0, col:0,}); 
+		backButton.collider = "static";	
+	}
 	
 
-	//function mouseInteractBackButton () {
-	//	if (backButton.mouse.hovering()) {
-		//	backButton.addAni ({w:16, h:16, row:1, col:0,}); 
+	function mouseInteractBackButton () {
+		if (backButton.mouse.hovering()) {
+			backButton.addAni ({w:16, h:16, row:1, col:0,}); 
 		
-	//	}
+		}
 	
-	//	else {
-	//		backButton.addAni ({w:16, h:16, row:0, col:0,});     
-	//	}
-	//	if (backButton.mouse.pressing()) {
-	//		window.location.href = "index.html";
-	//	}}
+		else {
+			backButton.addAni ({w:16, h:16, row:0, col:0,});     
+		}
+		if (backButton.mouse.pressing()) {
+			window.location.href = "index.html";
+		}}
 
 /*******************************************************/
 //  END OF APP

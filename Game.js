@@ -8,7 +8,7 @@
 //Variables
 var Player;
 var score = 0;
-
+health = 3;
 canvasSize = {
 	x: 1200,
 	y: 600
@@ -75,6 +75,7 @@ unclimableblock.collider = "static";
 unclimableblock.spriteSheet = sheetImg;
 unclimableblock.addAni({w:16, h:16, row:1, col:9 });
 unclimableblock.tile = 'w';
+unclimableblock.friction = 0;
 
 new Tiles([
 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
@@ -85,13 +86,13 @@ new Tiles([
 'w',
 'w',
 'w.......................e',	
-'w......................rrr.......................d.................r',
+'w......................rrr.......................d................',
 'w........d........rr........................r.....................r',
 'w...........................................r.....................r',
 'w...........rr...................d..........r.....................r',
-'rrrrrrrrrr.......................................................rrr.................',
+'rrrrrrrrrr.......................................................rrr................e',
 'rrrrrrrrrrr......e.....................................d........rrrr',
-'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrcr..wrrrrrrrrrrrrrcccccccccccccccwwwwwwwwrrrrrrrrrrrr....rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrcr..rrrrrrrrrrrrrrccclllcccccccccrrrrrrrrrrrrrrrrrrrr....rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........w....w',
 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........w....w',
 'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrwllwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........wllllw'
@@ -142,6 +143,7 @@ function draw() {
     if (gameState == "lose") {
         lose();
     }
+Player.rotation = 0;
 
 }
 
@@ -158,20 +160,25 @@ function displayScore() {
 
 function runGame(){
 	
+	if (Player.colliding (lava)) {Player.vel.y = -5; Player.vel.x = 1; health = (health - 1);
+	console.log(health)
+	}
 	
-
-	
+	  
 clear();
 background("grey")
 
 
 displayScore();
-	Player.rotation = 0;
-	Movement();
-	//makes the camera follow the player 
+Player.rotation = 0;
+Movement();
+//makes the camera follow the player 
 camera.x = Player.x;
 camera.y = Player.y;
-if (Player.y >= 1300 || Player.collides (lava)){lostgame();}
+//checking if the player has lost
+if (Player.y >= 1300){lostgame();}
+
+//checking if the player has won
 if (Player.x >= 2000) {completedlevel();}
 
 
@@ -192,7 +199,9 @@ if (diamond.overlaps(Player, playercollectsdiamond)) {
 			
 		}	
 		
-}
+	}		
+		
+
 
 function win () {
 	console.log("WINNING")
@@ -265,7 +274,7 @@ function mouseInteractRestartButton () {
     }}
 
 	function Restart(){
-		restartButton = new Sprite (canvasSize.x/2, 200);
+	restartButton = new Sprite (canvasSize.x/2, 200);
 	  restartButton.spriteSheet = buttonImg;
 	  restartButton.addAni ({w:16, h:16, row:0, col:0,}); 
 	   restartButton.collider = "static";	
@@ -277,14 +286,19 @@ function mouseInteractRestartButton () {
 		backButton.addAni ({w:16, h:16, row:1, col:0,}); 
 		backButton.collider = "static";	
 		console.log("back working")
+
+
 	}
 	
 
 	function mouseInteractBackButton () {
 		if (backButton.mouse.hovering()) {
 			backButton.addAni ({w:16, h:16, row:0, col:0,}); 
+			
 		
 		}
+
+
 	
 		else {
 			backButton.addAni ({w:16, h:16, row:1, col:0,});     

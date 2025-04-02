@@ -163,6 +163,8 @@ function runGame(){
 	
 clear();
 background("grey")
+
+
 displayScore();
 	Player.rotation = 0;
 	Movement();
@@ -189,12 +191,13 @@ if (diamond.overlaps(Player, playercollectsdiamond)) {
 		playercollectsemerald();
 			
 		}	
+		
 }
 
 function win () {
 	console.log("WINNING")
 		mouseInteractRestartButton();
-	
+		mouseInteractBackButton();
 	}
 function completedlevel(){
 	gameState = "win";
@@ -217,6 +220,7 @@ function completedlevel(){
 
 
 	Restart();
+	Back();
 }
 
 function lose () {
@@ -270,19 +274,20 @@ function mouseInteractRestartButton () {
 	function Back(){
 		backButton = new Sprite (200, 100);
 		backButton.spriteSheet = backImg;
-		backButton.addAni ({w:16, h:16, row:0, col:0,}); 
+		backButton.addAni ({w:16, h:16, row:1, col:0,}); 
 		backButton.collider = "static";	
+		console.log("back working")
 	}
 	
 
 	function mouseInteractBackButton () {
 		if (backButton.mouse.hovering()) {
-			backButton.addAni ({w:16, h:16, row:1, col:0,}); 
+			backButton.addAni ({w:16, h:16, row:0, col:0,}); 
 		
 		}
 	
 		else {
-			backButton.addAni ({w:16, h:16, row:0, col:0,});     
+			backButton.addAni ({w:16, h:16, row:1, col:0,});     
 		}
 		if (backButton.mouse.pressing()) {
 			window.location.href = "index.html";

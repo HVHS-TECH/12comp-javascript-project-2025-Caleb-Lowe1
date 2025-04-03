@@ -38,6 +38,8 @@ cnv = new Canvas(canvasSize.x,canvasSize.y, "pixelated x4")
 world.gravity.y = 10
 Player = new Sprite(213, 477.9145351606422, 10, 10, 'd');
 	Player.color = 'blue';
+	Player.stroke = 'black';
+	Player.strokeWeight = 1;
 
 lava = new Group();
 lava.collider = "static";
@@ -117,8 +119,7 @@ function playercollectsemerald(e) {
     e.remove();
     score = score + 120;
 
-    Player.rotationSpeed = 0;
-    Player.rotation = 0;
+    
 	
 }
 
@@ -142,7 +143,6 @@ function draw() {
     if (gameState == "lose") {
         lose();
     }
-Player.rotation = 0;
 
 }
 
@@ -154,20 +154,23 @@ Player.rotation = 0;
 /*******************************************************/
 function displayScore() {
 	textSize(20);
+	fill(0);
 	text("Score: " + score, 0, 15);	
+	
 }
 
 function runGame(){
 	
-	if (Player.colliding (lava)) {Player.vel.y = -5; Player.vel.x = 1; health = (health - 1);
+	if (Player.collides (lava)) {Player.vel.y = -5; Player.vel.x = 1; health = (health - 1);
 	console.log(health)
 	}
+	
 	
 	  
 clear();
 background("grey")
 
-
+healthbar();
 displayScore();
 Player.rotationLock = true;
 Movement();
@@ -175,7 +178,8 @@ Movement();
 camera.x = Player.x;
 camera.y = Player.y;
 //checking if the player has lost
-if (Player.y >= 1300){lostgame();}
+if (Player.y >= 1300 || (health <= 0)) 
+{lostgame();}
 
 //checking if the player has won
 if (Player.x >= 2000) {completedlevel();}
@@ -197,7 +201,7 @@ if (diamond.overlaps(Player, playercollectsdiamond)) {
 		playercollectsemerald();
 			
 		}	
-		//healthbar();
+		
 	}		
 		
 
@@ -306,14 +310,19 @@ function mouseInteractRestartButton () {
 			window.location.href = "index.html";
 		}}
 
-		//function healthbar() {
-		//	for (var i = 0; i < health; i++) {
-		//		health = new Sprite(50+30*i, 250, 50, 50);
-		//		health.collider = "static";
+		function healthbar() {
+			fill(255); 
+			textSize(20); 
+			text("Health:", 15, 50);
+			for (var i = 0; i < health; i++) {
+				
+				fill(255, 0, 0);
+    			noStroke();
+    			rect(90 + 30 * i, 40, 20, 20); 
 				
 				
-		//	  }
-		//}
+			  }
+		}
 
 /*******************************************************/
 //  END OF APP

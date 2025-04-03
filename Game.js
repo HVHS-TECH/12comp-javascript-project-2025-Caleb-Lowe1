@@ -20,7 +20,7 @@ var restartButton;
 var backButton;	
 //enviroment
 let sheetImg;
-let rock, cobblestone, unclimableblock, lava, diamond, emerald;
+let rock, cobblestone, unclimableblock, lava, diamond, emerald, hotrock;
 function preload() {
 	sheetImg = loadImage("Textures-16.png");
 	buttonImg = loadImage("Restart.png");
@@ -36,7 +36,7 @@ function setup() {
 console.log("setup: ");
 cnv = new Canvas(canvasSize.x,canvasSize.y, "pixelated x4")
 world.gravity.y = 10
-Player = new Sprite(213, 477.9145351606422, 10, 10, 'd');
+Player = new Sprite(30, 100, 10, 10, 'd');
 	Player.color = 'blue';
 	Player.stroke = 'black';
 	Player.strokeWeight = 1;
@@ -46,6 +46,12 @@ lava.collider = "static";
 lava.spriteSheet = sheetImg;
 lava.addAni({w:16, h:16, row:9, col:11 });
 lava.tile = 'l';
+
+hotrock = new Group();
+hotrock.collider = "static";
+hotrock.spriteSheet = sheetImg;
+hotrock.addAni({w:16, h:16, row:9, col:0 });
+hotrock.tile = 'h';
 
 
 emerald = new Group();
@@ -80,7 +86,7 @@ unclimableblock.tile = 'w';
 unclimableblock.friction = 0;
 
 new Tiles([
-'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rrrrrcrrrrrrrrrrrcrrrrrrrrrrcrrrrrrrrrrrrrrcccccrrrrrrrcrrrrrrcrrrrrrrrrrrrrrrrrcrrrrrrcrrrrrrrrrrrrrcrrrrrrrrrrcccrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
 'w',
 'w',
 'w',
@@ -88,18 +94,18 @@ new Tiles([
 'w',
 'w',
 'w.......................e',	
-'w......................rrr.......................d................',
+'w......................hrc.......................e................d',
 'w........d........rr........................r.....................r',
 'w...........................................r.....................r',
-'w...........rr...................d..........r.....................r',
-'rrrrrrrrrr.......................................................rrr................e',
-'rrrrrrrrrrr......e.....................................d........rrrr',
-'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrcr..rrrrrrrrrrrrrrccclllcccccccccrrrrrrrrrrrrrrrrrrrr....rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
-'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........w....w',
-'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........w....w',
-'rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrwllwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........wllllw'
+'w...........cr...................d..........r.....................c',
+'rrrrrcrrr.......................................................rrr................e',
+'rrrrrrrrrrr......e.....................................d........rcrr',
+'rrrrrccrrrrrrrrrrrrrrrhhhrrrrrcr..rrrrrrrrrrrrrrcccllcccrrrccrcrrrrcrrrrrrrcrrrcrrr....rrrrrrrrcrrrrcrrcrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rrrrrrrrrrrrcrrrrcrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........w....w',
+'rrrrrrrrrrrrrrrrrrrrcrrrrrrrrrrwllwrrrrrrrrrrrrccrrrrrrrrcrrrrrrcrrrrrr...........wllllw',
+'rrrrrrrrrcrrrrccrrrrrrrrcrrrrrrwwwwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........wwwwww'
 ],
-100, 300, //x,y
+0, 0, //x,y
 16,16, //w,h 
 
 )}
@@ -161,7 +167,7 @@ function displayScore() {
 
 function runGame(){
 	
-	if (Player.collides (lava)) {Player.vel.y = -5; Player.vel.x = 1; health = (health - 1);
+	if (Player.collides (lava) || Player.collides (hotrock)) {Player.vel.y = -5; Player.vel.x = 1; health = (health - 1);
 	console.log(health)
 	}
 	
@@ -221,7 +227,7 @@ function completedlevel(){
 	cobblestone.removeAll();
 	rock.removeAll();
 	lava.removeAll();
-
+    hotrock.removeAll();
 	camera.x = canvasSize.x/2;
     camera.y = canvasSize.y/2;
 	background("yellow");
@@ -251,6 +257,7 @@ function lostgame()	{
 	rock.removeAll();
 	lava.removeAll();
 	emerald.removeAll();
+	hotrock.removeAll();
 	camera.x = canvasSize.x/2;
     camera.y = canvasSize.y/2;
 	background("red");

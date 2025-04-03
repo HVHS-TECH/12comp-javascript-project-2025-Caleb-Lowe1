@@ -149,7 +149,7 @@ function draw() {
     }
     if (gameState == "lose") {
         lose();
-    }
+    };
 
 }
 
@@ -169,32 +169,33 @@ function displayScore() {
 function runGame(){
 	
 	
-console.log(camera.x, camera.y)	  
+ 
 clear();
 background("grey")
 healthbar();
+camera.x = Player.x;
+camera.y = Player.y;	
+Movement();
 displayScore();
 Player.rotationLock = true;
-if (Player.collides (lava) || Player.collides (hotrock)) {Player.vel.y = -5; Player.vel.x = 1; health = (health - 1);
-	console.log(health)
-	}
-	
-	if (Player.y >= 1300 || (health <= 0)) 
-		{lostgame();}
-Movement();
+
 //makes the camera follow the player 
-camera.x = Player.x;
-camera.y = Player.y;
-//checking if the player has lost
+
+
 
 
 //checking if the player has won
 if (Player.x >= 2000) {completedlevel();}
 
 
+//checking if the player has lost
+if (Player.y >= 1300 || (health <= 0)) 
+	{lostgame();}
 
-
-
+if (Player.collides (lava) || Player.collides (hotrock)) {Player.vel.y = -5; Player.vel.x = 1; health = (health - 1);
+	console.log(health)
+	}
+	
 
 if (diamond.overlaps(Player, playercollectsdiamond)) {
 	
@@ -240,12 +241,12 @@ if (diamond.overlaps(Player, playercollectsdiamond)) {
 		
 		
 		Restart();
+		
+		
 		Back();
 
 		
 
-		console.log(camera.x + "lost x")
-		console.log(camera.y + "lost y")
 		};
 
 function win () {
@@ -264,8 +265,8 @@ function completedlevel(){
 	rock.removeAll();
 	lava.removeAll();
     hotrock.removeAll();
-	camera.x = canvasSize.x/2;
-    camera.y = canvasSize.y/2;
+	camera.x = canvasSize.x / 2;
+    camera.y = canvasSize.y / 2;
 	background("yellow");
 	textSize(20);
 	textAlign(CENTER, CENTER);
@@ -277,8 +278,7 @@ function completedlevel(){
 
 	Back();
 
-	console.log(camera.x + "won x")
-	console.log(camera.y + "won y")
+
 };
 
 
@@ -298,23 +298,21 @@ function mouseInteractRestartButton () {
     }}
 
 	function Restart(){
-		if (restartButton) restartButton.remove();
-		restartButton = new Sprite(canvasSize.x / 2, 200);
+		
+	restartButton = new Sprite(canvasSize.x / 2, canvasSize.y / 2);
 	  restartButton.spriteSheet = buttonImg;
 	  restartButton.addAni ({w:16, h:16, row:0, col:0,}); 
 	   restartButton.collider = "static";
-	   console.log(restartButton.x + "restart x")
-	   console.log(restartButton.y + "restart y")	
+
    };
 
 	function Back(){
-		backButton = new Sprite (200, 100);
+		backButton = new Sprite (canvasSize.x / 2 + (16), canvasSize.y / 2);
 		backButton.spriteSheet = backImg;
 		backButton.addAni ({w:16, h:16, row:1, col:0,}); 
 		backButton.collider = "static";	
 		console.log("back working")
-		console.log(backButton.x + "back x")
-		console.log(backButton.y + "back y")	
+	
 
 	}
 	

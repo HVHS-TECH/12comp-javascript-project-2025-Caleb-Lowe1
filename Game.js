@@ -108,8 +108,7 @@ function playercollectsdiamond(d) {
     d.remove();
     score = score + 70;
 
-    Player.rotationSpeed = 0;
-    Player.rotation = 0;
+    
 	
 }
 
@@ -170,7 +169,7 @@ background("grey")
 
 
 displayScore();
-Player.rotation = 0;
+Player.rotationLock = true;
 Movement();
 //makes the camera follow the player 
 camera.x = Player.x;
@@ -198,7 +197,7 @@ if (diamond.overlaps(Player, playercollectsdiamond)) {
 		playercollectsemerald();
 			
 		}	
-		
+		//healthbar();
 	}		
 		
 
@@ -306,6 +305,15 @@ function mouseInteractRestartButton () {
 		if (backButton.mouse.pressing()) {
 			window.location.href = "index.html";
 		}}
+
+		//function healthbar() {
+		//	for (var i = 0; i < health; i++) {
+		//		health = new Sprite(50+30*i, 250, 50, 50);
+		//		health.collider = "static";
+				
+				
+		//	  }
+		//}
 
 /*******************************************************/
 //  END OF APP

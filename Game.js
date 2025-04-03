@@ -36,7 +36,7 @@ function setup() {
 console.log("setup: ");
 cnv = new Canvas(canvasSize.x,canvasSize.y, "pixelated x4")
 world.gravity.y = 10
-Player = new Sprite(30, 100, 10, 10, 'd');
+Player = new Sprite(30, 178.01034375, 10, 10, 'd');
 	Player.color = 'blue';
 	Player.stroke = 'black';
 	Player.strokeWeight = 1;
@@ -99,10 +99,10 @@ new Tiles([
 'w...........................................r.....................r',
 'w...........cr...................d..........r.....................c',
 'rrrrrcrrr.......................................................rrr................e',
-'rrrrrrrrrrr......e.....................................d........rcrr',
-'rrrrrccrrrrrrrrrrrrrrrhhhrrrrrcr..rrrrrrrrrrrrrrcccllcccrrrccrcrrrrcrrrrrrrcrrrcrrr....rrrrrrrrcrrrrcrrcrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
-'rrrrrrrrrrrrcrrrrcrrrrrrrrrrrrrw..wrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........w....w',
-'rrrrrrrrrrrrrrrrrrrrcrrrrrrrrrrwllwrrrrrrrrrrrrccrrrrrrrrcrrrrrrcrrrrrr...........wllllw',
+'rrrrrhrrrrr......e.....................................d........rcrr',
+'rrrrrccrrrrrrrrrrrrrrrhhhrrrrrcr..rrrrhrrrrrrrrrcccllcccrrrchrcrrrrcrrrrrrrcrrrcrrr....rrrrhrrrcrrrrcrrcrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rrllrrrrhrrrcrrrrcrrrrrrrrrrrrrw..wrrrhrrrrrrhrrrrrrrrrrrrrrrrrrrrrrhrr...........w....w',
+'rrrrrrrrrrrrrrrrrrrrcrhrrrrrrrrwllwrrrrrrhrllrrccrrrrrhrrcrrrrrrcrrrrrr...........wllllw',
 'rrrrrrrrrcrrrrccrrrrrrrrcrrrrrrwwwwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........wwwwww'
 ],
 0, 0, //x,y
@@ -172,7 +172,7 @@ function runGame(){
 	}
 	
 	
-	  
+console.log(camera.x, camera.y)	  
 clear();
 background("grey")
 

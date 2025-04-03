@@ -4,6 +4,7 @@
 // P5.play: Cave run
 // Extension tasks
 // Written by 22026cl
+
 /*******************************************************/
 //Variables
 var Player;
@@ -88,29 +89,29 @@ unclimableblock.friction = 0;
 new Tiles([
 'rrrrrcrrrrrrrrrrrcrrrrrrrrrrcrrrrrrrrrrrrrrcccccrrrrrrrcrrrrrrcrrrrrrrrrrrrrrrrrcrrrrrrcrrrrrrrrrrrrrcrrrrrrrrrrcccrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
 'w',
-'w',
-'w',
-'w',
-'w',
-'w',
+'w........................................................................................c',
+'w........................................................................................rr',
+'w...............................................................................rrcrrrcccrcr',
+'w........................................................................................rr',
+'w........................................................................................c',
 'w.......................e',	
 'w......................hrc.......................e................d',
-'w........d........rr........................r.....................r',
-'w...........................................r.....................r',
-'w...........cr...................d..........r.....................c',
+'w........d........rr.........................r....................r',
+'w............................................r....................r',
+'w...........cr...................d...........r....................c',
 'rrrrrcrrr.......................................................rrr................e',
-'rrrrrhrrrrr......e.....................................d........rcrr',
-'rrrrrccrrrrrrrrrrrrrrrhhhrrrrrcr..rrrrhrrrrrrrrrcccllcccrrrchrcrrrrcrrrrrrrcrrrcrrr....rrrrhrrrcrrrrcrrcrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
-'rrllrrrrhrrrcrrrrcrrrrrrrrrrrrrw..wrrrhrrrrrrhrrrrrrrrrrrrrrrrrrrrrrhrr...........w....w',
-'rrrrrrrrrrrrrrrrrrrrcrhrrrrrrrrwllwrrrrrrhrllrrccrrrrrhrrcrrrrrrcrrrrrr...........wllllw',
-'rrrrrrrrrcrrrrccrrrrrrrrcrrrrrrwwwwrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........wwwwww'
+'rrrrrhrrrrr......e.....................................d........hcrr',
+'rcrccccrrrrrrrrrrrrrrrhhhrrrrrcr..rrrrhrrrrrrrrrcccllcccrrrchrcrrrrcrrrrrrrcrrrcrrr....rrrhhrrrcrrrrcrrcrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rchhrrrrhrrrcrrrrcrrrrrrrrrrrrrw..wrrrhrrrrrrhrrrrrrrrrrrrrrrrrrrrrrhrr...........w....w',
+'rrcrrrrrrrrrrrrrrrrrcrhrrrrrrrrhllhrrrrrrhrhhrrccrrrrrhrrcrrrrrrcrrrrrr...........wllllw',
+'rrrrrrrrrcrrrrccrrrrrrrrcrrrrrrhhhhrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........wwwwww'
 ],
 0, 0, //x,y
 16,16, //w,h 
 
 )}
 
-//if the player collides with a diamond the diamond will disapear and the user will gain 100 score 
+//if the player collects a diamond the diamond will disapear and the user will gain 100 score 
 function playercollectsdiamond(d) {
     
     d.remove();
@@ -119,7 +120,7 @@ function playercollectsdiamond(d) {
     
 	
 }
-
+//if player collects an emerald they will earn 120 score points and the emerald will disapear
 function playercollectsemerald(e) {
     
     e.remove();
@@ -167,25 +168,25 @@ function displayScore() {
 
 function runGame(){
 	
-	if (Player.collides (lava) || Player.collides (hotrock)) {Player.vel.y = -5; Player.vel.x = 1; health = (health - 1);
-	console.log(health)
-	}
-	
 	
 console.log(camera.x, camera.y)	  
 clear();
 background("grey")
-
 healthbar();
 displayScore();
 Player.rotationLock = true;
+if (Player.collides (lava) || Player.collides (hotrock)) {Player.vel.y = -5; Player.vel.x = 1; health = (health - 1);
+	console.log(health)
+	}
+	
+	if (Player.y >= 1300 || (health <= 0)) 
+		{lostgame();}
 Movement();
 //makes the camera follow the player 
 camera.x = Player.x;
 camera.y = Player.y;
 //checking if the player has lost
-if (Player.y >= 1300 || (health <= 0)) 
-{lostgame();}
+
 
 //checking if the player has won
 if (Player.x >= 2000) {completedlevel();}
@@ -212,11 +213,46 @@ if (diamond.overlaps(Player, playercollectsdiamond)) {
 		
 
 
+	function lose () {
+		console.log ("I LOST :(")
+		mouseInteractRestartButton();
+		mouseInteractBackButton();
+	
+	};
+	function lostgame()	{
+		gameState = "lose";
+		
+		Player.remove();
+		unclimableblock.removeAll();
+		diamond.removeAll();
+		cobblestone.removeAll();
+		rock.removeAll();
+		lava.removeAll();
+		emerald.removeAll();
+		hotrock.removeAll();
+		camera.x = canvasSize.x/2;
+		camera.y = canvasSize.y/2;
+		background("red");
+		textSize(20);
+		textAlign(CENTER, CENTER);
+		text("you lost!!", canvasSize.x/2, 50);
+		text("Score: "+ score, canvasSize.x/2, 100);
+		
+		
+		Restart();
+		Back();
+
+		
+
+		console.log(camera.x + "lost x")
+		console.log(camera.y + "lost y")
+		};
+
 function win () {
 	console.log("WINNING")
 		mouseInteractRestartButton();
 		mouseInteractBackButton();
-	}
+	};
 function completedlevel(){
 	gameState = "win";
 	score = score + 200;
@@ -238,36 +274,14 @@ function completedlevel(){
 
 
 	Restart();
-	Back();
-}
 
-function lose () {
-    console.log ("I LOST :(");
-    mouseInteractRestartButton();
-	mouseInteractBackButton();
-
-}
-function lostgame()	{
-	gameState = "lose";
-	
-	Player.remove();
-	unclimableblock.removeAll();
-	diamond.removeAll();
-	cobblestone.removeAll();
-	rock.removeAll();
-	lava.removeAll();
-	emerald.removeAll();
-	hotrock.removeAll();
-	camera.x = canvasSize.x/2;
-    camera.y = canvasSize.y/2;
-	background("red");
-	textSize(20);
-	textAlign(CENTER, CENTER);
-	text("you lost!!", canvasSize.x/2, 50);
-	text("Score: "+ score, canvasSize.x/2, 100);
-	Restart();
 	Back();
-	}
+
+	console.log(camera.x + "won x")
+	console.log(camera.y + "won y")
+};
+
+
 
 	
 function mouseInteractRestartButton () {
@@ -284,10 +298,13 @@ function mouseInteractRestartButton () {
     }}
 
 	function Restart(){
-	restartButton = new Sprite (canvasSize.x/2, 200);
+		if (restartButton) restartButton.remove();
+		restartButton = new Sprite(canvasSize.x / 2, 200);
 	  restartButton.spriteSheet = buttonImg;
 	  restartButton.addAni ({w:16, h:16, row:0, col:0,}); 
-	   restartButton.collider = "static";	
+	   restartButton.collider = "static";
+	   console.log(restartButton.x + "restart x")
+	   console.log(restartButton.y + "restart y")	
    };
 
 	function Back(){
@@ -296,7 +313,8 @@ function mouseInteractRestartButton () {
 		backButton.addAni ({w:16, h:16, row:1, col:0,}); 
 		backButton.collider = "static";	
 		console.log("back working")
-
+		console.log(backButton.x + "back x")
+		console.log(backButton.y + "back y")	
 
 	}
 	

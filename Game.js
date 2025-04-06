@@ -1,5 +1,6 @@
 //gem textures https://laredgames.itch.io/gems-coins-free
 //map textures https://piiixl.itch.io/textures
+//background image https://lil-cthulhu.itch.io/pixel-art-cave-background
 /*******************************************************/
 // P5.play: Cave run
 // Extension tasks
@@ -16,7 +17,12 @@ canvasSize = {
 	}
 
 
+	let caveBg;
 
+	function preload() {
+	  // your other assets
+	   // replace with your file name
+	}
 var restartButton;	
 var backButton;	
 //enviroment
@@ -28,6 +34,10 @@ function preload() {
 	diamondImg = loadImage("spr_coin_azu.png")
 	emeraldImg = loadImage("spr_coin_strip4.png")
 	backImg = loadImage("back.png");
+	caveBg1 = loadImage("grey_L1.png");
+	caveBg2 = loadImage("grey_L2.png");
+	caveBg3 = loadImage("grey_L3.png");
+	caveBg4 = loadImage("grey_L4.png");
 }
 /*******************************************************/
 // setup()
@@ -88,19 +98,19 @@ unclimableblock.friction = 0;
 
 new Tiles([
 'rrrrrcrrrrrrrrrrrcrrrrrrrrrrcrrrrrrrrrrrrrrcccccrrrrrrrcrrrrrrcrrrrrrrrrrrrrrrrrcrrrrrrcrrrrrrrrrrrrrcrrrrrrrrrrcccrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
-'w',
-'w........................................................................................c',
-'w........................................................................................rr',
-'w...............................................................................rrcrrrcccrcr',
-'w........................................................................................rr',
-'w........................................................................................c',
+'w.......',
+'w...........................................c............................................c',
+'w...........................................rr...........................................rr',
+'w..................................rrcrrrcccrcr.................................rrcrrrcccrcr',
+'w...........................................rr.e.........................................rr',
+'w...........................................c............................................c',
 'w.......................e',	
 'w......................hrc.......................e................d',
 'w........d........rr.........................r....................r',
 'w............................................r....................r',
 'w...........cr...................d...........r....................c',
 'rrrrrcrrr.......................................................rrr................e',
-'rrrrrhrrrrr......e.....................................d........hcrr',
+'rrrrrhrrrrr......d.....................................d........hcrr...................................................d',
 'rcrccccrrrrrrrrrrrrrrrhhhrrrrrcr..rrrrhrrrrrrrrrcccllcccrrrchrcrrrrcrrrrrrrcrrrcrrr....rrrhhrrrcrrrrcrrcrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
 'rchhrrrrhrrrcrrrrcrrrrrrrrrrrrrw..wrrrhrrrrrrhrrrrrrrrrrrrrrrrrrrrrrhrr...........w....w',
 'rrcrrrrrrrrrrrrrrrrrcrhrrrrrrrrhllhrrrrrrhrhhrrccrrrrrhrrcrrrrrrcrrrrrr...........wllllw',
@@ -171,7 +181,11 @@ function runGame(){
 	
  
 clear();
-background("grey")
+
+background(caveBg1);
+background(caveBg2);
+background(caveBg3);
+background(caveBg4);
 healthbar();
 camera.x = Player.x;
 camera.y = Player.y;	
@@ -299,18 +313,19 @@ function mouseInteractRestartButton () {
 
 	function Restart(){
 		
-	restartButton = new Sprite(canvasSize.x / 2, canvasSize.y / 2);
+	restartButton = new Sprite(canvasSize.x / 2 - (32), canvasSize.y / 2);
 	  restartButton.spriteSheet = buttonImg;
 	  restartButton.addAni ({w:16, h:16, row:0, col:0,}); 
 	   restartButton.collider = "static";
-
+	restartButton.scale = 2;
    };
 
 	function Back(){
-		backButton = new Sprite (canvasSize.x / 2 + (16), canvasSize.y / 2);
+		backButton = new Sprite (canvasSize.x / 2 + (32), canvasSize.y / 2);
 		backButton.spriteSheet = backImg;
 		backButton.addAni ({w:16, h:16, row:1, col:0,}); 
 		backButton.collider = "static";	
+		backButton.scale = 2;
 		console.log("back working")
 	
 

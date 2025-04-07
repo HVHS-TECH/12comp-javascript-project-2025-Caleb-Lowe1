@@ -52,6 +52,7 @@ Player = new Sprite(30, 178.01034375, 10, 10, 'd');
 	Player.stroke = 'black';
 	Player.strokeWeight = 1;
 
+
 lava = new Group();
 lava.collider = "static";
 lava.spriteSheet = sheetImg;
@@ -106,12 +107,12 @@ new Tiles([
 'w...........................................c............................................c',
 'w.......................e',	
 'w......................hrc.......................e................d',
-'w........d........rr.........................r....................r',
-'w............................................r....................r',
-'w...........cr...................d...........r....................c',
-'rrrrrcrrr.......................................................rrr................e',
+'w........d........rr.........................r....................r.........................................e',
+'w............................................r....................r....................................r.......',
+'w...........cr...................d...........r....................c....................................',
+'rrrrrcrrr.......................................................rrr..................d...........r',
 'rrrrrhrrrrr......d.....................................d........hcrr...................................................d',
-'rcrccccrrrrrrrrrrrrrrrhhhrrrrrcr..rrrrhrrrrrrrrrcccllcccrrrchrcrrrrcrrrrrrrcrrrcrrr....rrrhhrrrcrrrrcrrcrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rcrccccrrrrrrrrrrrrrrrhhhrrrrrcr..rrrrhrrrrrrrrrcccllcccrrrchrcrrrrcrrrrrrrcrrrcrrr....rrrhhrrrcrrrrcrrcrrrrrrrrrrrrr..rrr.rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
 'rchhrrrrhrrrcrrrrcrrrrrrrrrrrrrw..wrrrhrrrrrrhrrrrrrrrrrrrrrrrrrrrrrhrr...........w....w',
 'rrcrrrrrrrrrrrrrrrrrcrhrrrrrrrrhllhrrrrrrhrhhrrccrrrrrhrrcrrrrrrcrrrrrr...........wllllw',
 'rrrrrrrrrcrrrrccrrrrrrrrcrrrrrrhhhhrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........wwwwww'
@@ -171,7 +172,8 @@ function draw() {
 /*******************************************************/
 function displayScore() {
 	textSize(20);
-	fill(0);
+	fill(500);
+	
 	text("Score: " + score, 0, 15);	
 	
 }
@@ -199,7 +201,7 @@ Player.rotationLock = true;
 
 
 //checking if the player has won
-if (Player.x >= 2000) {completedlevel();}
+if (Player.x >= 2000 && Player.y <= 220) {completedlevel();}
 
 
 //checking if the player has lost
@@ -282,6 +284,7 @@ function completedlevel(){
 	camera.x = canvasSize.x / 2;
     camera.y = canvasSize.y / 2;
 	background("yellow");
+	fill(0)
 	textSize(20);
 	textAlign(CENTER, CENTER);
 	text("YOU WON!!", canvasSize.x/2, 50);

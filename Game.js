@@ -25,6 +25,7 @@ canvasSize = {
 	}
 var restartButton;	
 var backButton;	
+var finish;
 //enviroment
 let sheetImg;
 let rock, cobblestone, unclimableblock, lava, diamond, emerald, hotrock;
@@ -34,6 +35,7 @@ function preload() {
 	diamondImg = loadImage("spr_coin_azu.png")
 	emeraldImg = loadImage("spr_coin_strip4.png")
 	backImg = loadImage("back.png");
+	finishImg = loadImage("finishline.png");
 	caveBg1 = loadImage("grey_L1.png");
 	caveBg2 = loadImage("grey_L2.png");
 	caveBg3 = loadImage("grey_L3.png");
@@ -46,7 +48,14 @@ function setup() {
 	gameState = "play";
 console.log("setup: ");
 cnv = new Canvas(canvasSize.x,canvasSize.y, "pixelated x4")
-world.gravity.y = 10
+world.gravity.y = 10;
+
+finish = new Sprite (2002, 190);
+finish.spriteSheet = finishImg;
+finish.addAni ({w:16, h:16, row:0, col:0,}); 
+finish.collider = "none";	
+finish.scale = 4;
+
 Player = new Sprite(30, 178.01034375, 10, 10, 'd');
 	Player.color = 'blue';
 	Player.stroke = 'black';
@@ -100,14 +109,14 @@ unclimableblock.friction = 0;
 new Tiles([
 'rrrrrcrrrrrrrrrrrcrrrrrrrrrrcrrrrrrrrrrrrrrcccccrrrrrrrcrrrrrrcrrrrrrrrrrrrrrrrrcrrrrrrcrrrrrrrrrrrrrcrrrrrrrrrrcccrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
 'w.......',
-'w...........................................c............................................c',
-'w...........................................rr...........................................rr',
-'w..................................rrcrrrcccrcr.................................rrcrrrcccrcr',
-'w...........................................rr.e.........................................rr',
-'w...........................................c............................................c',
+'w...................................c....................................................c',
+'w...................................rr...................................................rr',
+'w..........................rrcrrrcccrcr.........................................rrcrrrcccrcr',
+'w...................................rr.........e.........................................rr',
+'w...................................c....................................................c',
 'w.......................e',	
 'w......................hrc.......................e................d',
-'w........d........rr.........................r....................r.........................................e',
+'w........d........rr.........................r....................r............................................e',
 'w............................................r....................r....................................r.......',
 'w...........cr...................d...........r....................c....................................',
 'rrrrrcrrr.......................................................rrr..................d...........r',
@@ -201,7 +210,7 @@ Player.rotationLock = true;
 
 
 //checking if the player has won
-if (Player.x >= 2000 && Player.y <= 220) {completedlevel();}
+if (Player.overlaps(finish)) {completedlevel();}
 
 
 //checking if the player has lost
@@ -272,7 +281,10 @@ function win () {
 	};
 function completedlevel(){
 	gameState = "win";
-	score = score + 200;
+	if (health == 3) {
+	score = score + 200;}
+	else if (health == 2) {score = score + 100;}
+	else if (health == 1) {score = score + 50;}
 	Player.remove();
 	unclimableblock.removeAll();
 	diamond.removeAll();
@@ -354,7 +366,7 @@ function mouseInteractRestartButton () {
 		function healthbar() {
 			fill(255); 
 			textSize(20); 
-			text("Health:", 15, 50);
+			text("Health:", 10, 55);
 			for (var i = 0; i < health; i++) {
 				
 				fill(255, 0, 0);

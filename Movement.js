@@ -1,19 +1,21 @@
 const MOVEMENTSPEED = 2.4;
 const JUMPSPEED = 4;
 function Movement() {
-    //movement code    
+    //sprinting code    
     if (kb.pressing('a') && kb.pressing('shift')) {
         Player.vel.x = -MOVEMENTSPEED - 1;
 
     }
+    //walking code
     else if (kb.pressing('a')) {
         Player.vel.x = -MOVEMENTSPEED + 0.5;
     }
-
+   //sprinting code   
     if (kb.pressing('d') && kb.pressing('shift')) {
         Player.vel.x = MOVEMENTSPEED + 1;
 
     }
+     //walking code
     else if (kb.pressing('d')) {
         Player.vel.x = MOVEMENTSPEED - 0.5;
 

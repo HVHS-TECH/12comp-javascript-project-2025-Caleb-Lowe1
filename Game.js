@@ -107,21 +107,21 @@ function setup() {
 	unclimableblock.friction = 0;
 
 	new Tiles([
-		'rrrrrcrrrrrrrrrrrcrrrrrrrrrrcrrrrrrrrrrrrrrcccccrrrrrrrcrrrrrrcrrrrrrrrrrrrrrrrrcrrrrrrcrrrrrrrrrrrrrcrrrrrrrrrrcccrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
-		'w.......',
-		'w...................................c....................................................c',
-		'w...................................rr...................................................rr',
-		'w..........................rrcrrrcccrcr.........................................rrcrrrcccrcr',
-		'w...................................rr.........e.........................................rr',
-		'w...................................c....................................................c',
-		'w.......................e',
-		'w......................hrc.......................e',
-		'w........d........rr.........................r....................r............................................e',
-		'w............................................r....................r....................................r.......',
-		'w...........cr...................d...........r....................c....................................',
-		'rrrrrcrrr.......................................................rrr..................d...........r',
-		'rrrrrhrrrrr......d.....................................d........hcrr......d............................................d',
-		'rcrccccrrrrrrrrhrrrrrrhhhrrrrrcr..rrrrhrrrrrrrrrcccllcccrrrchrcrrrrcrrrrrrrcrrrcrrr....rrrhhrrrcrrrrcrrcrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+		'rrrrrcrrrrrrrrrrrcrrrrrrrrrrcrrrrrrrrrrrrrrcccccrrrrrrrcrrrrrrcrrrrrrrrrrrrrrrrrcrrrrrrcrrrrrrrrrrrrrcrrrrrrrrrrcccrrrrrrrrrrrrrw',
+		'w...............................................................................................................................w',
+		'w...................................c....................................................c......................................w',
+		'w...................................rr...................................................rr.....................................w',
+		'w..........................rrcrrrcccrcr.........................................rrcrrrcccrcr....................................w',
+		'w...................................rr.........e.........................................rr.....................................w',
+		'w...................................c....................................................c......................................w',
+		'w.......................e.......................................................................................................w',
+		'w......................hrc.......................e..............................................................................w',
+		'w........d........rr.........................r....................r............................................e................w',
+		'w............................................r....................r....................................r........................w',
+		'w...........cr...................d...........r....................c.............................................................w',
+		'rrrrrcrrr.......................................................rrr..................d...........r..............................w',
+		'rrrrrhrrrrr......d.....................................d........hcrr......d............................................d........w',
+		'rcrccccrrrrrrrrhrrrrrrhhhrrrrrcr..rrrrhrrrrrrrrrcccllcccrrrchrcrrrrcrrrrrrrcrrrcrrr....rrrhhrrrcrrrrcrrcrrrrrrrrrrrrrrrrrrrrrrrrr',
 		'rchhrrrrhrrrcrrrrcrrrrrrrrrrrrrw..wrrrhrrrrrrhrrrrrrrrrrrrrrrrrrrrrrhrr...........w....w',
 		'rrcrrrrrrrrrrrrrrrrrcrhrrrrrrrrhllhrrrrrrhrhhrrccrrrrrhrrcrrrrrrcrrrrrr...........wllllw',
 		'rrrrrrrrrcrrrrccrrrrrrrrcrrrrrrhhhhrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........wwwwww'
@@ -222,9 +222,9 @@ function runGame() {
 	if (Player.y >= 1300 || (health <= 0)) {
 		lostgame();
 	}
-
+	//if the player touches a hot material (hot rock or lava) then the player loses 1 health
 	if (Player.collides(lava) || Player.collides(hotrock)) {
-		Player.vel.y = -5; Player.vel.x = 1; health = (health - 1);
+		Player.vel.y = -5; health = (health - 1);
 	}
 
 

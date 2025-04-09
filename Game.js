@@ -115,13 +115,13 @@ new Tiles([
 'w...................................rr.........e.........................................rr',
 'w...................................c....................................................c',
 'w.......................e',	
-'w......................hrc.......................e................d',
+'w......................hrc.......................e',
 'w........d........rr.........................r....................r............................................e',
 'w............................................r....................r....................................r.......',
 'w...........cr...................d...........r....................c....................................',
 'rrrrrcrrr.......................................................rrr..................d...........r',
-'rrrrrhrrrrr......d.....................................d........hcrr...................................................d',
-'rcrccccrrrrrrrrrrrrrrrhhhrrrrrcr..rrrrhrrrrrrrrrcccllcccrrrchrcrrrrcrrrrrrrcrrrcrrr....rrrhhrrrcrrrrcrrcrrrrrrrrrrrrr..rrr.rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
+'rrrrrhrrrrr......d.....................................d........hcrr......d............................................d',
+'rcrccccrrrrrrrrrrrrrrrhhhrrrrrcr..rrrrhrrrrrrrrrcccllcccrrrchrcrrrrcrrrrrrrcrrrcrrr....rrrhhrrrcrrrrcrrcrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',
 'rchhrrrrhrrrcrrrrcrrrrrrrrrrrrrw..wrrrhrrrrrrhrrrrrrrrrrrrrrrrrrrrrrhrr...........w....w',
 'rrcrrrrrrrrrrrrrrrrrcrhrrrrrrrrhllhrrrrrrhrhhrrccrrrrrhrrcrrrrrrcrrrrrr...........wllllw',
 'rrrrrrrrrcrrrrccrrrrrrrrcrrrrrrhhhhrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr...........wwwwww'
@@ -198,13 +198,14 @@ background(caveBg2);
 background(caveBg3);
 background(caveBg4);
 healthbar();
+//makes the camera follow the player 
 camera.x = Player.x;
 camera.y = Player.y;	
 Movement();
 displayScore();
 Player.rotationLock = true;
 
-//makes the camera follow the player 
+
 
 
 
@@ -214,6 +215,7 @@ if (Player.overlaps(finish)) {completedlevel();}
 
 
 //checking if the player has lost
+//Player.y >= 1300 is for if the player somehow managed to glitch through the map
 if (Player.y >= 1300 || (health <= 0)) 
 	{lostgame();}
 

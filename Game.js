@@ -193,7 +193,7 @@ function runGame() {
 
 
 	clear();
-
+	//different background layers
 	background(caveBg1);
 	background(caveBg2);
 	background(caveBg3);
@@ -204,6 +204,7 @@ function runGame() {
 	camera.y = Player.y;
 	Movement();
 	displayScore();
+	//makes the sure the player won't rotate 
 	Player.rotationLock = true;
 
 
@@ -227,14 +228,14 @@ function runGame() {
 		Player.vel.y = -5; health = (health - 1);
 	}
 
-
+	//overlaps instead of collides because diamond has no collision so that the diamond can be collected without affecting the players movement
 	if (diamond.overlaps(Player, playercollectsdiamond)) {
 
 		playercollectsdiamond();
 
 	}
 
-
+//overlaps instead of collides because emerald has no collision so that the diamond can be collected without affecting the players movement
 	if (emerald.overlaps(Player, playercollectsemerald)) {
 
 		playercollectsemerald();
@@ -247,6 +248,7 @@ function runGame() {
 
 function lose() {
 	console.log("I LOST :(")
+	//makes it so that you can press the buttons
 	mouseInteractRestartButton();
 	mouseInteractBackButton();
 
@@ -261,6 +263,7 @@ function lostgame() {
 	lava.removeAll();
 	emerald.removeAll();
 	hotrock.removeAll();
+	//resets camera position
 	camera.x = canvasSize.x / 2;
 	camera.y = canvasSize.y / 2;
 	background("red");
@@ -279,6 +282,7 @@ function lostgame() {
 
 function win() {
 	console.log("WINNING")
+	//makes it so that you can press the buttons
 	mouseInteractRestartButton();
 	mouseInteractBackButton();
 };
@@ -297,6 +301,7 @@ function completedlevel() {
 	rock.removeAll();
 	lava.removeAll();
 	hotrock.removeAll();
+	//resets camera position
 	camera.x = canvasSize.x / 2;
 	camera.y = canvasSize.y / 2;
 	background("yellow");

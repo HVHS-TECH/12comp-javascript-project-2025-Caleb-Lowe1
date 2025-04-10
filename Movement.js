@@ -10,12 +10,12 @@ function Movement() {
     else if (kb.pressing('a')) {
         Player.vel.x = -MOVEMENTSPEED + 0.5;
     }
-   //sprinting code   
+    //sprinting code   
     if (kb.pressing('d') && kb.pressing('shift')) {
         Player.vel.x = MOVEMENTSPEED + 1;
 
     }
-     //walking code
+    //walking code
     else if (kb.pressing('d')) {
         Player.vel.x = MOVEMENTSPEED - 0.5;
 
